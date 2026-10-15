@@ -1,4 +1,4 @@
-
+-- Monthly Revenue
 SELECT strftime('%Y-%m', order_purchase_timestamp) AS month, 
        COUNT(DISTINCT o.order_id) AS orders,
        ROUND(SUM(oi.price), 2) AS revenue,
@@ -9,6 +9,7 @@ WHERE o.order_status = 'delivered'
 GROUP BY month
 ORDER BY month;
 
+-- Daily Orders for November 2017
 SELECT DATE(order_purchase_timestamp) AS day,
        COUNT(DISTINCT order_id) AS orders
 FROM orders
