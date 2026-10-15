@@ -10,11 +10,10 @@ SQL analysis of ~100k orders from a Brazilian e-commerce marketplace (2016–201
 
 1. How do monthly revenue and order volume trend over time?
 2. Which product categories generate the most revenue?
-3. What share of customers come back to buy again?
-4. Which states generate the most revenue?
-5. How often are orders delivered later than estimated?
-6. Do late deliveries lead to lower review scores?
-7. How concentrated is revenue among the top sellers?
+3. How often are orders delivered later than estimated?
+4. Do late deliveries lead to lower review scores?
+5. Which payment types are most common, and does average order value differ by type?
+
 
 ---
 
@@ -46,7 +45,6 @@ GROUP BY delivery;
 | [Late] | [ ] | [ ] |
 | [On time] | [ ] | [ ] |
 
-*(Paste your real output here. One or two result tables like this are enough; the rest live in `sql/`.)*
 
 ---
 
