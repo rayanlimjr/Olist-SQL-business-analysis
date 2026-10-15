@@ -21,11 +21,19 @@ SQL analysis of ~100k orders from a Brazilian e-commerce marketplace (2016–201
 
 1. How do monthly revenue and order volume trend over time? 
 
-Trends: Monthly revenue from delivered orders (excluding freight, in R$) steadily grew from 2017-01 to 2017-11, reaching a peak of R$988k in revenue and 7289 orders, with 2017-10 to 2017-11 being the highest increase in both fields between months at around R$340k (~50%) and 3800 orders (~85%) The next 3 months show a fluctuation in revenue between R$726k and R$925k before flattening out at R$950k-R$980k for the next 3 months then eased R$840k-R$870k for the remaining months from 2018-06 to 2018-08. 2016-09 to 2016-12 are left out of this analysis as 3 of the 4 months have only either 1 or no orders, likely due to the marketplace only starting up during that period.
+Findings: Monthly revenue from delivered orders (excluding freight, in R$) steadily grew from 2017-01 to 2017-11, reaching a peak of R$988k in revenue and 7289 orders, with 2017-10 to 2017-11 being the highest increase in both fields between months at around R$340k (~50%) and 3800 orders (~85%) The next 3 months show a fluctuation in revenue between R$726k and R$925k before flattening out at R$950k-R$980k for the next 3 months then eased R$840k-R$870k for the remaining months from 2018-06 to 2018-08. 2016-09 to 2016-12 are left out of this analysis as 3 of the 4 months have only either 1 or no orders, likely due to the marketplace only starting up during that period.
 
 Analysis: From the data, we can see that the average order value always remains between R$124-R$149, so growth was driven by order volume, not larger orders. Therefore, the huge spike in revenue and orders in 2017-11 could likely be driven by Black Friday sales. By checking the order volumes by each day in November, we can see that on 24 November there is a huge spike in order volume at 1147 orders while the rest of the days typically average around 200 orders. However, the rest of the daily orders across 2017-11 were also well above the average in 2017-10, therefore the increase likely reflects seasonal growth trends in addition to Black Friday promotions.
 
 Actions: The business should plan stock and delivery capacity for Black Fridays that is several times the average in that month.
+
+2. Which product categories generate the most revenue?
+
+Findings: The top 3 product categories that generate the most revenue (excluding freight, in R$) are health and beauty products, watches, and home textiles and linens (bed_bath_table). The revenue distribution is fairly concentrated to the top 10 product categories as they generate roughly 62.4% of the total revenue, and the top 3 generating around 26% of the total revenue as compared to the other 63 categories. Out of the top 3 product categories, home textiles and linens and health and beauty products have a much higher order count as compared to watches while still generating similar revenue. However, watches have a higher average price per item at ~R$190 while health and beauty and home textiles and linen are at ~R$130 and ~R$93 respectively. Something to note, there are 610 orders with NULL values which account for ~1% of the total revenue, so it should not affect the ranking.
+
+Analysis: The revenue generated from the top few categories come from 2 different models: high-volume, low-price categories(home textiles and linen) and low-price, high-volume categories (watches) 
+
+Actions: With high-volume, low-price models, the business could implement bundles or "buy 1 get 1 free" to increase the likelihood of customers adding more of these items into their baskets. With low-volume, high-price models, the business could implement instalment payment options or gift-season campaigns so that customers will be less hesitant to buy a slightly pricey item.
 
 ### Recommendations
 
