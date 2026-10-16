@@ -35,6 +35,13 @@ Analysis: The revenue generated from the top few categories come from 2 differen
 
 Actions: With high-volume, low-price models, the business could implement bundles or "buy 1 get 1 free" to increase the likelihood of customers adding more of these items into their baskets. With low-volume, high-price models, the business could implement instalment payment options or gift-season campaigns so that customers will be less hesitant to buy a slightly pricey item.
 
+3. How often are orders delivered later than estimated?
+
+Findings: Out of the 96470 delivered orders, orders were delivered late 6534 times (~7%). The states with the highest percentage of orders being late are AL (~24%), MA (~20%), and PI (~16%). The deliveries were late by an average of 11.3 days. States with under 100 orders such as RR and AM are excluded as they are too small to compare.
+
+Analysis: Late deliveries are concentrated in states far away from SP, where ~71% of all orders originate. Cross-state orders were late 8% of the time, while same-state orders were only late 4.5% of the time, which could suggest distance being a factor. However, even RJ, a neighbouring state of SP, have ~14% of its orders being delivered late. Olist's estimated delivery times exceeded the actual days it took across all states (~8-20 days each). Despite this, there all still multiple states with high percentages of late deliveries, which could suggest a long tail of heavily delayed orders and not general slowness. This is proven as ~44% of deliveries that were late took more than 8 days to reach customers. On deliveries that were late, most of the days were spent during the carrier delivery (~28 days) rather than the seller's handling time (~6 days). This likely suggests a lack of optimization in carrier routes.
+
+Actions: The business should look into reoptimizing their carrier routes to ensure that deliveries on time as late deliveries may affect customer satisfaction.
 ### Recommendations
 
 
