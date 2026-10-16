@@ -41,7 +41,16 @@ Findings: Out of the 96470 delivered orders, orders were delivered late 6534 tim
 
 Analysis: Late deliveries are concentrated in states far away from SP, where ~71% of all orders originate. Cross-state orders were late 8% of the time, while same-state orders were only late 4.5% of the time, which could suggest distance being a factor. However, even RJ, a neighbouring state of SP, have ~14% of its orders being delivered late. Olist's estimated delivery times exceeded the actual days it took across all states (~8-20 days each). Despite this, there all still multiple states with high percentages of late deliveries, which could suggest a long tail of heavily delayed orders and not general slowness. This is proven as ~44% of deliveries that were late took more than 8 days to reach customers. On deliveries that were late, most of the days were spent during the carrier delivery (~28 days) rather than the seller's handling time (~6 days). This likely suggests a lack of optimization in carrier routes.
 
-Actions: The business should look into reoptimizing their carrier routes to ensure that deliveries on time as late deliveries may affect customer satisfaction.
+Actions: The business should look into spending more of their resources in reoptimizing their carrier routes or upgrading their choice of transit vehicles to ensure that deliveries on time as late deliveries may affect customer satisfaction.
+
+4. Do late deliveries lead to lower review scores?
+
+Findings: Deliveries made on time have an average rating of 4.29 and only ~9% of them were rated 2 or below. Late deliveries have a noticably lower rating and considerably higher percentage of ratings that were 2 or below, at 2.27 and ~62% respectively. Scores (average) also fall further the later the order arrives, 3.29 for 1-3 days late, 2.11 for 4-7 days late, and 1.7 for more than 7 days late.
+
+Analysis: From the findings, we can infer that late deliveries are strongly associated with poor reviews, and the gradient across lateness levels suggests that it isn't just a coincidence.Ratings were increased by more than 2 points and were 7 times less likely to receive a low rating when orders were delivered on time. Other factors such as poor customer service or poor product quality can also be reasons why review ratings drop, however we cannot confirm the accuracy of those statements due to limited data.
+
+Action: The business should prioritise reducing the longest delays (8+ days late). This could be done by introducing a on-time delivery rate KPI for sellers and carriers.
+
 ### Recommendations
 
 
