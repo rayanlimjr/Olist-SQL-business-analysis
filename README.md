@@ -51,6 +51,12 @@ Analysis: From the findings, we can infer that late deliveries are strongly asso
 
 Action: The business should prioritise reducing the longest delays (8+ days late). This could be done by introducing a on-time delivery rate KPI for sellers and carriers.
 
+5. Which payment types are most common, and does average order value differ by type?
+Findings: Some things to note, payment value includes freight unlike the revenue in Q1 and Q2, an order paid by 2 types such as credit card and voucher is counted once for each type, and there are a few rows with no payment types but not enough to affect the data. The most common payment method is by credit card with a usage of ~75% while also having the highest order value at ~R$163. Vouchers have the lowest average order value at ~R$93 comapred to the rest of the payment methods at ~R$140 to ~R$163, but that is normal as it is the discounted portion of the purchase. 
+
+Analysis: Based on the data, we can see that larger purchases are usually paid in instalments, starting at ~R$134 in 2-3 instalments to ~R$359 in 11+ instalments. However, another set of data shows the average amount of instalments used in a payment does not go up as the amount spent in an order goes up but is rather all over the place, which indicates that the earlier recommendation in Q2 for more instalment payment options for expensive times is not supported by my current data. Across all product categories, whether high or low priced, most of them are paid by credit card (~77% to ~84%) with the exception for computer accessories (~68%) as it uses boleto as payment (~29%) more than the other categories (~12% to 20%). Computer accessories boleto usage rises as prices go up (from ~28% to ~34%) while the rest of the categories are the opposite (from ~24% to ~15%). Failure rates are a negligible factor of this anomaly since they are under 1%.
+
+Action: Do not build a category specific instalment strategy as the data shows instalment usage is not affected by order value, stick to one effective instalment option across all categories. Make boleto a first class option for computer accessories, test whether giving beleto specific discounts or pop-up messages suggesting boleto as payment will increase conversion.
 ### Recommendations
 
 
