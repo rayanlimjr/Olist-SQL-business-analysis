@@ -4,6 +4,18 @@ SQL analysis of ~100k orders from a Brazilian e-commerce marketplace (2016–201
 
 **Tools:** SQLite · DB Browser for SQLite · Python (pandas) for loading data · SQL (joins, CTEs, window functions)
 
+## Executive Summary
+
+Growth was volume-driven and peaked around Black Friday, but ~7% of orders arrive late and those orders score about 2 points lower. Priorities: reduce the tail of badly delayed deliveries, plan for demand peaks, and test boleto and basket-size offers.
+
+## Recommendations
+
+| # | Recommendation | Evidence | How to test |
+|---|----------------|----------|-------------|
+| 1 | Reduce the long tail of late deliveries | ~7% of orders arrive late, ~44% of those by more than 8 days; late orders average 2.27 vs 4.29 for on-time ones (Q3, Q4) | Profile orders 8+ days late by seller, state and carrier lane; track an on-time delivery KPI for sellers and carriers |
+| 2 | Plan capacity for demand peaks | 1,147 orders on Black Friday vs ~200 on a typical November day (Q1) | Compare the late-delivery rate in Nov 2017 with surrounding months to check whether the surge strained delivery |
+| 3 | Grow basket size in high-volume, low-price categories | Growth was volume-driven, with average order value steady at R$124–R$149; home textiles earns revenue through many low-priced orders (Q1, Q2) | Pilot bundles or "add another item" offers and compare basket size with a control group |
+
 ---
 
 ## Business questions
@@ -18,9 +30,9 @@ SQL analysis of ~100k orders from a Brazilian e-commerce marketplace (2016–201
 
 ## Key findings
 
-### 1. How do monthly revenue and order volume trend over time? 
+### 1. How do monthly revenue and order volume trend over time?
 
-**Findings:** Monthly revenue from delivered orders (excluding freight, in R$) steadily grew from 2017-01 to 2017-11, reaching a peak of **R$988k** in revenue and **7289** orders, with 2017-10 to 2017-11 being the highest increase in both fields between months at around **R$340k (~50%)** and **3800** orders **(~85%)** The next 3 months show a fluctuation in revenue between **R$726k and R$925k** before flattening out at **R$950k-R$980k for** the next 3 months then eased **R$840k-R$870k** for the remaining months from 2018-06 to 2018-08. 2016-09 to 2016-12 are left out of this analysis as 3 of the 4 months have only either 1 or no orders, likely due to the marketplace only starting up during that period.
+**Findings:** Monthly revenue from delivered orders (excluding freight, in R$) steadily grew from 2017-01 to 2017-11, reaching a peak of **R$988k** in revenue and **7289** orders, with 2017-10 to 2017-11 being the highest increase in both fields between months at around **R$340k (~50%)** and **3800** orders **(~85%)**. The next 3 months show a fluctuation in revenue between **R$726k and R$925k** before flattening out at **R$950k-R$980k** for the next 3 months then eased **R$840k-R$870k** for the remaining months from 2018-06 to 2018-08. 2016-09 to 2016-12 are left out of this analysis as 3 of the 4 months have only either 1 or no orders, likely due to the marketplace only starting up during that period.
 
 **Analysis:** From the data, we can see that the average order value always remains between **R$124-R$149**, so growth was driven by order volume, not larger orders. Therefore, the huge spike in revenue and orders in 2017-11 could likely be driven by Black Friday sales. By checking the order volumes by each day in November, we can see that on 24 November there is a huge spike in order volume at **1147** orders while the rest of the days typically average around **200** orders. However, the rest of the daily orders across 2017-11 were also well above the average in 2017-10, therefore the increase likely reflects seasonal growth trends in addition to Black Friday promotions.
 
@@ -36,9 +48,9 @@ SQL analysis of ~100k orders from a Brazilian e-commerce marketplace (2016–201
 
 ### 3. How often are orders delivered later than estimated?
 
-**Findings:** Out of the **96470** delivered orders, orders were delivered late **6534** times **(~7%)**. The states with the highest percentage of orders being late are AL **(~24%)**, MA **(~20%)**, and PI **(~16%)**. The deliveries were late by an average of **11.3 days**. States with under 100 orders such as RR and AM are excluded as they are too small to compare.
+**Findings:** Out of the 96470 delivered orders, orders were delivered late 6534 times **(~7%)**. The states with the highest percentage of orders being late are AL **(~24%)**, MA **(~20%)**, and PI **(~16%)**. The deliveries were late by an average of **11.3 days**. States with under 100 orders such as RR and AM are excluded as they are too small to compare.
 
-**Analysis:** Late deliveries are concentrated in states far away from SP, where **~71%** of all orders originate. Cross-state orders were late **8%** of the time, while same-state orders were only late **4.5%** of the time, which could suggest distance being a factor. However, even RJ, a neighbouring state of SP, have **~14%** of its orders being delivered late. Olist's estimated delivery times exceeded the actual days it took across all states **(~8-20 days each)**. Despite this, there are still multiple states with high percentages of late deliveries, which could suggest a long tail of heavily delayed orders and not general slowness. This is proven as **~44%** of deliveries that were late took more than 8 days to reach customers. On deliveries that were late, most of the days were spent during the carrier delivery **(~28 days**) rather than the seller's handling time **(~6 days)**. This likely suggests a lack of optimization in carrier routes.
+**Analysis:** Late deliveries are concentrated in states far away from SP, where **~71%** of all orders originate. Cross-state orders were late **8%** of the time, while same-state orders were only late **4.5%** of the time, which could suggest distance being a factor. However, even RJ, a neighbouring state of SP, have **~14%** of its orders being delivered late. Olist's estimated delivery times exceeded the actual days it took across all states **(~8-20 days each)**. Despite this, there are still multiple states with high percentages of late deliveries, which could suggest a long tail of heavily delayed orders and not general slowness. This is proven as **~44%** of deliveries that were late took more than 8 days to reach customers. On deliveries that were late, most of the days were spent during the carrier delivery **(~28 days)** rather than the seller's handling time **(~6 days)**. This likely suggests a lack of optimization in carrier routes.
 
 **Actions:** The business should look into spending more of their resources in reoptimizing their carrier routes or upgrading their choice of transit vehicles to ensure that deliveries are on time as late deliveries may affect customer satisfaction.
 
@@ -51,19 +63,13 @@ SQL analysis of ~100k orders from a Brazilian e-commerce marketplace (2016–201
 **Action:** The business should prioritise reducing the longest delays (8+ days late). This could be done by introducing an on-time delivery rate KPI for sellers and carriers.
 
 ### 5. Which payment types are most common, and does average order value differ by type?
-**Findings:**  The most common payment method is by credit card with a usage of **~75%** while also having the highest order value at **~R$163**. Vouchers have the lowest average order value at **~R$93** compared to the rest of the payment methods at **~R$140** to **~R$163**, but that is normal as it is the discounted portion of the purchase. Some things to note, payment value includes freight unlike the revenue in Q1 and Q2, an order paid by 2 types such as credit card and voucher is counted once for each type, and there are a few rows with no payment types but not enough to affect the data.
+**Findings:** The most common payment method is by credit card with a usage of **~75%** while also having the highest order value at **~R$163**. Vouchers have the lowest average order value at **~R$93** compared to the rest of the payment methods at **~R$140** to **~R$163**, but that is normal as it is the discounted portion of the purchase. Some things to note, payment value includes freight unlike the revenue in Q1 and Q2, an order paid by 2 types such as credit card and voucher is counted once for each type, and there are a few rows with no payment types but not enough to affect the data.
 
 **Analysis:** The data suggests that larger purchases are usually paid in instalments, starting at **~R$134** in 2-3 instalments to **~R$359** in 11+ instalments. However, another set of data shows the average amount of instalments used in a payment does not go up as the amount spent in an order goes up but is rather all over the place, which indicates that the earlier recommendation in Q2 for more instalment payment options for expensive items is not supported by my current data. Across all product categories, whether high or low priced, most of them are paid by credit card **(~77% to ~84%)** with the exception for computer accessories **(~68%)** as it uses boleto as payment **(~29%)** more than the other categories **(~12% to 20%)**. Computer accessories boleto usage rises as prices go up **(from ~28% to ~34%)** while the rest of the categories are the opposite **(from ~24% to ~15%)**. Failure rates are a negligible factor of this anomaly since they are under 1%.
 
 **Action:** Do not build a category specific instalment strategy as the data shows instalment usage is not affected by order value, stick to one effective instalment option across all categories. Make boleto a first class option for computer accessories, test whether giving boleto specific discounts or pop-up messages suggesting boleto as payment will increase conversion.
 
-### Recommendations
-
-1. Reduce the long tail of late deliveries
-2. Plan capacity for demand peaks
-3. Grow basket size in high-volume, low-price categories
-
-### Limitations
+## Limitations
 
 1. No cost or margin data, so every recommendation needs a pilot.
 2. Findings are associations, not proof of cause (especially delivery vs reviews).
@@ -75,7 +81,7 @@ SQL analysis of ~100k orders from a Brazilian e-commerce marketplace (2016–201
 
 **Source:** [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) on Kaggle. The data is not included in this repo because of file size, so download it and put the CSVs in `data/archive/`.
 
-**Size and period:** about 99k orders placed between Sep 2016 and Oct 2018, spread across 9 tables.
+**Size and period:** about 99k orders placed between Sep 2016 and Aug 2018, spread across 9 tables.
 
 ### Entity-relationship diagram
 
@@ -179,4 +185,7 @@ erDiagram
 ```
 
 ## What I learned / next steps
-Joining items and payments double-counts revenue, averaging multiple reviews per order, “late” is measured against Olist’s own estimate, and averages hid a tail of heavily delayed orders. I plan to move on to another project with a dataset related to one of my interests and build a dashboard for it.
+- Joining items and payments double-counts revenue, so I kept them in seperate queries
+- Some orders have more than one review, so I averaged scores per order before joining.
+- "Late" is measured against Olist's own estimate, which already includes a buffer, so averages alone hid a long tail of heavily delayed orders.
+- **Next:** I plan to move on to another project with a dataset related to one of my interests and build a dashboard for it.
